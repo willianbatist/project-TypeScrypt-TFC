@@ -16,10 +16,10 @@ describe('Login Test', () => {
   before(() => {
     sinon.stub(User, 'findOne')
       .resolves({ 
-        id: 123,
-        username: 'Willian',
+        id: 2,
+        username: 'User',
         role: 'user',
-        email: 'email@email.com',
+        email: 'user@user.com',
         password: '$2a$08$Y8Abi8jXvsXyqm.rmp0B.uQBA5qUz7T6Ghlg/CvVr/gLxYj5UAZVO'
       } as User) // para async
   });
@@ -30,13 +30,13 @@ describe('Login Test', () => {
   })
 
   const login = {
-    email: 'email@email.com',
-    password: '$2a$08$Y8Abi8jXvsXyqm.rmp0B.uQBA5qUz7T6Ghlg/CvVr/gLxYj5UAZVO'
+    email: 'user@user.com',
+    password: 'secret_user'
   }
 
   it('login successfully', async () => {
     const response = await chai.request(app).post('/login').send(login);
-    expect(response.status).to.be.equal(201);
+    expect(response.status).to.be.equal(200);
     expect(response.body).have.property('token');
   });
 });
