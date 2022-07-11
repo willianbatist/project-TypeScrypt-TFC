@@ -12,4 +12,14 @@ export function validationEmail(req: Request, res: Response, next: NextFunction)
   }
 }
 
-export const lest = {};
+export function validationPassword(req: Request, res: Response, next: NextFunction) {
+  try {
+    const { password } = req.body;
+    if (!password) {
+      return res.status(400).json({ message: 'All fields must be filled' });
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
