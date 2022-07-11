@@ -38,6 +38,10 @@ describe('Login Test', () => {
     password: 'secret_user'
   }
 
+  const loginEmail = {
+    email: 'user@user.com',
+  }
+
   it('login successfully', async () => {
     const response = await chai.request(app).post('/login').send(login);
     expect(response.status).to.be.equal(200);
@@ -46,6 +50,12 @@ describe('Login Test', () => {
 
   it('do not authorize login without email', async () => {
     const response = await chai.request(app).post('/login').send(loginPassword);
+    expect(response.status).to.be.equal(400);
+    expect(response.body).to.be.eql({ message: 'All fields must be filled' });
+  });
+
+  it('do not authorize login without password', async () => {
+    const response = await chai.request(app).post('/login').send(loginEmail);
     expect(response.status).to.be.equal(400);
     expect(response.body).to.be.eql({ message: 'All fields must be filled' });
   });
