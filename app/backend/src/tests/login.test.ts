@@ -34,9 +34,19 @@ describe('Login Test', () => {
     password: 'secret_user'
   }
 
+  const loginPassword = {
+    password: 'secret_user'
+  }
+
   it('login successfully', async () => {
     const response = await chai.request(app).post('/login').send(login);
     expect(response.status).to.be.equal(200);
     expect(response.body).have.property('token');
+  });
+
+  it('do not authorize login without email', async () => {
+    const response = await chai.request(app).post('/login').send(loginPassword);
+    expect(response.status).to.be.equal(400);
+    expect(response.body).to.be.eql({ message: 'All fields must be filled' });
   });
 });
