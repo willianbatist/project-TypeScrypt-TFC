@@ -42,6 +42,8 @@ describe('Login Test', () => {
     email: 'user@user.com',
   }
 
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoyLCJ1c2VybmFtZSI6IlVzZXIiLCJyb2xlIjoidXNlciIsImVtYWlsIjoidXNlckB1c2VyLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JFk4QWJpOGpYdnNYeXFtLnJtcDBCLnVRQkE1cVV6N1Q2R2hsZy9DdlZyL2dMeFlqNVVBWlZPIn0sImlhdCI6MTY1NzU3NDUyOCwiZXhwIjoxNjU3NjAzMzI4fQ.fw3_WS5ZuyZEfbesTpZ_zKUDAOVgEhSn2EVA9utfoyU'
+
   it('login successfully', async () => {
     const response = await chai.request(app).post('/login').send(login);
     expect(response.status).to.be.equal(200);
@@ -58,5 +60,11 @@ describe('Login Test', () => {
     const response = await chai.request(app).post('/login').send(loginEmail);
     expect(response.status).to.be.equal(400);
     expect(response.body).to.be.eql({ message: 'All fields must be filled' });
+  });
+
+  it('Develop the /login/validate endpoint, where the response should be of status 200 with an object containing the role property.', async () => {
+    const response = await chai.request(app).get('/login/validate').set({ "Authorization": token });
+    expect(response.status).to.be.equal(200);
+    expect(response.body).have.property('role');
   });
 });
