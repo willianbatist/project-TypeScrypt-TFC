@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { UserFactory } from '../factory';
-import { validationEmail } from '../middleware/handleLogin';
+import { validationEmail, validationPassword } from '../middleware/handleLogin';
 
 const userRouter = Router();
 
-userRouter.post('/login', validationEmail, (req, res, next) => {
+userRouter.post('/login', validationEmail, validationPassword, (req, res, next) => {
   UserFactory().login(req, res, next);
 });
 
