@@ -9,4 +9,9 @@ export default class Team implements ITeamService {
     const teams = await this.model.findAll();
     return teams;
   }
+
+  async findOne(id: string): Promise<ITeam | null> {
+    const team = await this.model.findOne(id);
+    return team;
+  }
 }
