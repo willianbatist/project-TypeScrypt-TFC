@@ -50,6 +50,6 @@ describe('2 - Team Test', () => {
   it('GET /teams/:id successfully', async () => {
     const response = await chai.request(app).get('/teams/:id');
     expect(response.status).to.be.equal(200);
-    expect(response.body).to.be.eql([{ id: 5, team_name: 'Cruzeiro' }])
+    expect(response.body).to.be.eql({ id: 5, team_name: 'Cruzeiro' })
   });
 });
