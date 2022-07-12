@@ -19,3 +19,16 @@ export interface IUserService {
   login(email: string, password: string): Promise<string | boolean>;
   role(authorization: string | undefined): Promise<IUser | null>;
 }
+
+export interface ITeam {
+  id?: number;
+  teamName: string;
+}
+
+export interface ITeamModel {
+  findAll(): Promise<ITeam[] | null>;
+}
+
+export interface ITeamService {
+  findAll(): Promise<ITeam[] | null>;
+}
