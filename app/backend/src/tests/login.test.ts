@@ -42,7 +42,7 @@ describe('Login Test', () => {
     email: 'user@user.com',
   }
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoyLCJ1c2VybmFtZSI6IlVzZXIiLCJyb2xlIjoidXNlciIsImVtYWlsIjoidXNlckB1c2VyLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JFk4QWJpOGpYdnNYeXFtLnJtcDBCLnVRQkE1cVV6N1Q2R2hsZy9DdlZyL2dMeFlqNVVBWlZPIn0sImlhdCI6MTY1NzU3NDUyOCwiZXhwIjoxNjU3NjAzMzI4fQ.fw3_WS5ZuyZEfbesTpZ_zKUDAOVgEhSn2EVA9utfoyU'
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoyLCJ1c2VybmFtZSI6IlVzZXIiLCJyb2xlIjoidXNlciIsImVtYWlsIjoidXNlckB1c2VyLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JFk4QWJpOGpYdnNYeXFtLnJtcDBCLnVRQkE1cVV6N1Q2R2hsZy9DdlZyL2dMeFlqNVVBWlZPIn0sImlhdCI6MTY1NzY1MjQ5OH0.UMEAZNmlMqHmvLDTrMz8dfxm1WrFfl07vn_hs2EI0_c'
 
   it('login successfully', async () => {
     const response = await chai.request(app).post('/login').send(login);
