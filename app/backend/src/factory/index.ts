@@ -1,6 +1,9 @@
 import UserRepository from '../repository/user.repository';
 import UserService from '../services/user.service';
 import UserController from '../controllers/user.controller';
+import TeamRepository from '../repository/team.repository';
+import TeamService from '../services/team.service';
+import TeamController from '../controllers/team.controller';
 
 export const UserFactory = () => {
   const repository = new UserRepository();
@@ -10,4 +13,10 @@ export const UserFactory = () => {
   return controller;
 };
 
-export const test = {};
+export const TeamFactory = () => {
+  const repository = new TeamRepository();
+  const service = new TeamService(repository);
+  const controller = new TeamController(service);
+
+  return controller;
+};
