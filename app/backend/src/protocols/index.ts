@@ -27,8 +27,10 @@ export interface ITeam {
 
 export interface ITeamModel {
   findAll(): Promise<ITeam[] | null>;
+  findOne(id: string): Promise<ITeam | null>;
 }
 
 export interface ITeamService {
   findAll(): Promise<ITeam[] | null>;
+  findOne(id: string): Promise<ITeam | null>;
 }
