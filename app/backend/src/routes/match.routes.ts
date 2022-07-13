@@ -4,7 +4,7 @@ import validateJWT from '../middleware/validateJWT';
 
 const matchRouter = Router();
 
-matchRouter.get('/matches', validateJWT, (req, res, next) => {
+matchRouter.get('/matches', (req, res, next) => {
   MatchFactory().findAll(req, res, next);
 });
 
