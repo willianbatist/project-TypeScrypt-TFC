@@ -28,6 +28,7 @@ export interface ITeam {
 export interface ITeamModel {
   findAll(): Promise<ITeam[] | null>;
   findOne(id: string): Promise<ITeam | null>;
+  findTeam(homeTeam: number, awayTeam:number): Promise<ITeam[] | null>;
 }
 
 export interface ITeamService {
