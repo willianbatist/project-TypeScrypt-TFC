@@ -13,7 +13,7 @@ matchRouter.post('/matches', validateJWT, validationMatch, (req, res, next) => {
   MatchFactory().create(req, res, next);
 });
 
-matchRouter.patch('/matches/:id/finish', validationMatch, (req, res, next) => {
+matchRouter.patch('/matches/:id/finish', (req, res, next) => {
   MatchFactory().update(req, res, next);
 });
 
