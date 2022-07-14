@@ -95,7 +95,7 @@ describe('Board Test', () => {
     (Team.findAll as sinon.SinonStub).restore();
   })
 
-  it('metodo get /leaderboard/home', async () => {
+  it('method get /leaderboard/home', async () => {
     const response = await chai.request(app).get('/leaderboard/home');
     expect(response.status).to.be.equal(200);
     expect(response.body).to.be.eql(boardMock);
