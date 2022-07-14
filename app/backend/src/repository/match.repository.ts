@@ -41,7 +41,7 @@ export default class MatchRepository implements IMatchModel {
     return match;
   }
 
-  async updateMatch(homeTeamGoals: number, awayTeamGoals: number, id: number): Promise<unknown> {
+  async updateMatch(homeTeamGoals: number, awayTeamGoals: number, id: string): Promise<unknown> {
     const upMatch = await this.model.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
     return upMatch;
   }

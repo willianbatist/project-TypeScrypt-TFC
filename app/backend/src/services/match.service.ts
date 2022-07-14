@@ -20,7 +20,7 @@ export default class MatchService implements IMatchService {
     return match;
   }
 
-  async updateMatch(homeTeamGoals: number, awayTeamGoals: number, id: number): Promise<unknown> {
+  async updateMatch(homeTeamGoals: number, awayTeamGoals: number, id: string): Promise<unknown> {
     const match = await this.model.updateMatch(homeTeamGoals, awayTeamGoals, id);
     return match;
   }
