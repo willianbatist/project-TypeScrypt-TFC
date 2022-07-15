@@ -16,6 +16,8 @@ Este repositório contem o **Projeto Trybe Futebol Clube** que reúne o aprendiz
   - Utilizar o MySql;
   - Utilizar JsonWebToken;
   - Clean Code;
+  - Utilizar conceitos da Programação Orientada a Objetos;
+  - SOLID;
   - Arquitetura API Rest e MVC.
 
 ---
