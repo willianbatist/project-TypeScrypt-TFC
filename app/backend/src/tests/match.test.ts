@@ -6,6 +6,7 @@ import * as jwt from 'jsonwebtoken';
 
 import { app } from '../app';
 import Match from '../database/models/Match';
+import { matchMock } from './mocks/index';
 
 import { Response } from 'superagent';
 
@@ -13,38 +14,10 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-const matchesMock = {
-  id: 1,
-  homeTeam: 16,
-  homeTeamGoals: 1,
-  awayTeam: 8,
-  awayTeamGoals: 1,
-  inProgress: false,
-  teamHome: {
-    teamName: "São Paulo"
-  },
-  teamAway: {
-    teamName: "Grêmio"
-  },
-};
-
 describe('1- Matches successfully', () => {
   before(() => {
     sinon.stub(Match, 'findAll')
-      .resolves([{ 
-        id: 1,
-        homeTeam: 16,
-        homeTeamGoals: 1,
-        awayTeam: 8,
-        awayTeamGoals: 1,
-        inProgress: false,
-        teamHome: {
-          teamName: "São Paulo"
-        },
-        teamAway: {
-          teamName: "Grêmio"
-        }
-      }] as unknown as Match[]) // para async
+      .resolves(matchMock as unknown as Match[])
   });
 
   after(() => {
@@ -55,20 +28,7 @@ describe('1- Matches successfully', () => {
   it('GET /matches successfully', async () => {
     const response = await chai.request(app).get('/matches');
     expect(response.status).to.be.equal(200);
-    expect(response.body).to.be.eql([{ 
-      id: 1,
-      homeTeam: 16,
-      homeTeamGoals: 1,
-      awayTeam: 8,
-      awayTeamGoals: 1,
-      inProgress: false,
-      teamHome: {
-        teamName: "São Paulo"
-      },
-      teamAway: {
-        teamName: "Grêmio"
-      }
-    }])
+    expect(response.body).to.be.eql(matchMock);
   });
 
 });
@@ -76,7 +36,7 @@ describe('1- Matches successfully', () => {
 describe('2 - Matches create', () => {
   before(() => {
     sinon.stub(Match, 'create')
-      .resolves(matchesMock as unknown as Match);
+      .resolves(matchMock[0] as unknown as Match);
   });
 
   after(() => {
@@ -85,7 +45,7 @@ describe('2 - Matches create', () => {
   })
 
   it('method post /matches without the token', async () => {
-    const response = await chai.request(app).post('/matches').send(matchesMock);
+    const response = await chai.request(app).post('/matches').send(matchMock[0]);
     expect(response.status).to.be.equal(401);
     expect(response.body).to.be.eql({ message: 'Token must be a valid token' });
   });
@@ -94,7 +54,7 @@ describe('2 - Matches create', () => {
 describe('3 - Matches create', async () => {
   before(() => {
     sinon.stub(Match, 'update')
-      .resolves(); // para async
+      .resolves();
   });
 
 
@@ -106,6 +66,6 @@ describe('3 - Matches create', async () => {
   it('metodo patch /matches/:id', async () => {
     const response = await chai.request(app).patch('/matches/1').send({ homeTeamGoals: 3, awayTeamGoals: 1 });
     expect(response.status).to.be.equal(200);
-    expect(response.body).to.be.eql({ message: 'ok' }); // eql compare objects
+    expect(response.body).to.be.eql({ message: 'ok' });
   });
 });

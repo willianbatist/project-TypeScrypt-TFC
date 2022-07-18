@@ -1,5 +1,6 @@
 import { IBoard, IBoardService, IMatchModel, ITeamModel, ITeam, IMatch } from '../protocols';
 import { handleGoalsHome, handleResultHome, handleTotalsGoals } from '../helpers';
+import { ZERO, ONE } from '../constants/index';
 
 // Realizado com ajuda de Rafael de Jesus Turma 17
 export default class BoardService implements IBoardService {
@@ -10,17 +11,17 @@ export default class BoardService implements IBoardService {
 
   static handleOrderBoard(board: IBoard[]): IBoard[] {
     const boarder = board.sort((a, b) => {
-      if (a.totalPoints > b.totalPoints) return -1;
-      if (a.totalPoints < b.totalPoints) return 1;
-      if (a.totalVictories > b.totalVictories) return -1;
-      if (a.totalVictories < b.totalVictories) return 1;
-      if (a.goalsBalance > b.goalsBalance) return -1;
-      if (a.goalsBalance < b.goalsBalance) return 1;
-      if (a.goalsFavor > b.goalsFavor) return -1;
-      if (a.goalsFavor < b.goalsFavor) return 1;
-      if (a.goalsOwn < b.goalsOwn) return -1;
-      if (a.goalsOwn > b.goalsOwn) return 1;
-      return 0;
+      if (a.totalPoints > b.totalPoints) return -ONE;
+      if (a.totalPoints < b.totalPoints) return ONE;
+      if (a.totalVictories > b.totalVictories) return -ONE;
+      if (a.totalVictories < b.totalVictories) return ONE;
+      if (a.goalsBalance > b.goalsBalance) return -ONE;
+      if (a.goalsBalance < b.goalsBalance) return ONE;
+      if (a.goalsFavor > b.goalsFavor) return -ONE;
+      if (a.goalsFavor < b.goalsFavor) return ONE;
+      if (a.goalsOwn < b.goalsOwn) return -ONE;
+      if (a.goalsOwn > b.goalsOwn) return ONE;
+      return ZERO;
     });
     return boarder;
   }
@@ -53,8 +54,8 @@ export default class BoardService implements IBoardService {
       return false;
     }
     const board = teams.map((team) => {
-      const myMatches = matches.filter((match) => match.homeTeam === team.id);
-      return BoardService.handleBoardHome(team, myMatches);
+      const myTotalMatches = matches.filter((match) => match.homeTeam === team.id);
+      return BoardService.handleBoardHome(team, myTotalMatches);
     });
     const boards = BoardService.handleOrderBoard(board);
     return boards;
