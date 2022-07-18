@@ -6,81 +6,13 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import Match from '../database/models/Match';
 import Team from '../database/models/Team';
+import { boardMock, matchMock, teamMock } from './mocks/index';
 
 import { Response } from 'superagent';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
-
-const boardMock = [
-  {
-    name: "Bahia",
-    totalPoints: 3,
-    totalGames: 1,
-    totalVictories: 1,
-    totalDraws: 0,
-    totalLosses: 0,
-    goalsFavor: 2,
-    goalsOwn: 1,
-    goalsBalance: 1,
-    efficiency: 100
-  },
-  {
-    name: "Avaí/Kindermann",
-    totalPoints: 0,
-    totalGames: 1,
-    totalVictories: 0,
-    totalDraws: 0,
-    totalLosses: 1,
-    goalsFavor: 1,
-    goalsOwn: 2,
-    goalsBalance: -1,
-    efficiency: 0
-  }
-]
-
-const matchMock = [
-  {
-    id: 1,
-    homeTeam: 1,
-    homeTeamGoals: 1,
-    awayTeam: 2,
-    awayTeamGoals: 2,
-    inProgress: false,
-    teamHome: {
-      teamName: "Avaí/Kindermann"
-    },
-    teamAway: {
-      teamName: "Bahia"
-    },
-  },
-  {
-    id: 2,
-    homeTeam: 2,
-    homeTeamGoals: 2,
-    awayTeam: 1,
-    awayTeamGoals: 1,
-    inProgress: false,
-    teamHome: {
-      teamName: "Bahia"
-    },
-    teamAway: {
-      teamName: "Avaí/Kindermann"
-    },
-  }
-];
-
-const teamMock = [
-  {
-    id: 1,
-    teamName: "Avaí/Kindermann"
-  },
-  {
-    id: 2,
-    teamName: "Bahia"
-  }
-]
 
 describe('Board Test', () => {
   before(() => {

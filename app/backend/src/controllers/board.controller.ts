@@ -9,6 +9,9 @@ export default class BoardService {
   async findHomeAll(req: Request, res: Response, next: NextFunction) {
     try {
       const matches = await this.service.findAllHome();
+      if (!matches) {
+        return res.status(401).json({ message: 'team statics not found' });
+      }
       return res.status(200).json(matches);
     } catch (error) {
       next(error);

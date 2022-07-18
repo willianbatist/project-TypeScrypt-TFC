@@ -5,6 +5,7 @@ import chaiHttp = require('chai-http');
 
 import { app } from '../app';
 import Team from '../database/models/Team';
+import { teams } from './mocks';
 
 import { Response } from 'superagent';
 
@@ -15,10 +16,7 @@ const { expect } = chai;
 describe('1 - Team Test', () => {
   before(() => {
     sinon.stub(Team, 'findAll')
-      .resolves([{
-          id: 1,
-          team_name: 'Avaí/Kindermann',
-        }] as unknown as Team[]) // para async
+      .resolves(teams as unknown as Team[]) // para async
   });
 
   after(() => {
@@ -29,17 +27,14 @@ describe('1 - Team Test', () => {
   it('GET /teams successfully', async () => {
     const response = await chai.request(app).get('/teams');
     expect(response.status).to.be.equal(200);
-    expect(response.body).to.be.eql([{ id: 1, team_name: 'Avaí/Kindermann' }])
+    expect(response.body).to.be.eql(teams)
   });
 });
 
 describe('2 - Team Test', () => {
   before(() => {
     sinon.stub(Team, 'findOne')
-      .resolves({
-        id: 5,
-        team_name: 'Cruzeiro',
-      } as unknown as Team) // para async
+      .resolves(teams[0] as unknown as Team) // para async
   });
 
   after(() => {
@@ -50,6 +45,6 @@ describe('2 - Team Test', () => {
   it('GET /teams/:id successfully', async () => {
     const response = await chai.request(app).get('/teams/5');
     expect(response.status).to.be.equal(200);
-    expect(response.body).to.be.eql({ id: 5, team_name: 'Cruzeiro' })
+    expect(response.body).to.be.eql(teams[0])
   });
 });
