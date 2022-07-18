@@ -3,6 +3,7 @@ import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import generateJWT from '../utils/generateJWT';
 import { IUserService, IUserModel } from '../protocols';
+import { SECRET } from '../constants/index';
 
 export default class User implements IUserService {
   constructor(private model: IUserModel) {
@@ -19,7 +20,7 @@ export default class User implements IUserService {
   }
 
   async role(token: string) {
-    const JWT: string = process.env.JWT_SECRET || 'jwt_secret';
+    const JWT: string = process.env.JWT_SECRET || SECRET;
     const secret = jwt.verify(token, JWT) as jwt.JwtPayload;
     const { password } = secret.payload;
     const role = await this.model.findRole(password);

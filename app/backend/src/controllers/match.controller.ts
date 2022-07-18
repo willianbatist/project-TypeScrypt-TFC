@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { IMatchService } from '../protocols/index';
+import { TRUE, FALSE } from '../constants/index';
 
 export default class MatchController {
   constructor(private service: IMatchService) {
@@ -10,8 +11,8 @@ export default class MatchController {
     try {
       const { inProgress } = req.query;
       let progress = null;
-      if (inProgress === 'false') progress = false;
-      if (inProgress === 'true') progress = true;
+      if (inProgress === FALSE) progress = false;
+      if (inProgress === TRUE) progress = true;
       const matches = await this.service.findAll(progress);
       return res.status(200).json(matches);
     } catch (error) {

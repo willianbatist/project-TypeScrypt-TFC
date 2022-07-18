@@ -74,5 +74,5 @@ export interface IBoard {
 }
 
 export interface IBoardService {
-  findAllHome(): Promise<IBoard[] | boolean>
+  findAllHome(): Promise<IBoard[] | boolean>;
 }
