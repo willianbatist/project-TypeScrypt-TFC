@@ -3,7 +3,7 @@ import { IBoardService } from '../protocols/index';
 
 export default class BoardService {
   constructor(private service: IBoardService) {
-
+    this.service = service;
   }
 
   async findHomeAll(req: Request, res: Response, next: NextFunction) {
